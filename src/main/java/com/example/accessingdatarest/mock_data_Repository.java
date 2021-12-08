@@ -10,9 +10,9 @@ import java.util.List;
 public interface mock_data_Repository extends PagingAndSortingRepository<mock_data, Integer> {
 
     List<mock_data>findById(@Param("id")int id);
-    List<mock_data>findByBuzzwords(@Param("Buzzwords")String Buzzwords);
-    List<mock_data>findByAppNames(@Param("AppNames")String AppNames);
-    List<mock_data>findByCompanyNames(@Param("CompanyNames")String CompanyNames);
-    List<mock_data>findByUserAgent(@Param("UserAgent")String UserAgent);
+    List<mock_data>findByBuzzwords(@Param("buzzwords")String buzzwords);
+    List<mock_data>findByAppnames(@Param("appnames")String appnames);
+    List<mock_data>findByCompanynames(@Param("companynames")String companynames);
+    List<mock_data>findByUseragent(@Param("useragent")String useragent);
 
 }
