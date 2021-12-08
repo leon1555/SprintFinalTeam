@@ -17,10 +17,10 @@ public class mock_data {
     @Column
     private String buzzwords;
     @Column
-    private String appNames;
+    private String appnames;
     @Column
-    private String companyNames;
+    private String companynames;
     @Column
-    private String userAgent;
+    private String useragent;
 
 }
