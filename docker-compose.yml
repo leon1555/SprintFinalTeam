@@ -1,9 +1,9 @@
 version: '3'
 services:
   myapp-main:
-    image: keyin/docker-demo
+    image: finalsprintteam3/finalsprint:1.0.2
     ports:
       - 8080:8080
     environment:
-#      - spring.datasource.url=jdbc:mysql://localhost:3306/jamie_demo
-      - spring.datasource.url=jdbc:mysql://host.docker.internal:3306/jamie_demo
+#      - spring.datasource.url=jdbc:mysql://localhost:5432/FinalSprintSem4
+      - spring.datasource.url=jdbc:mysql://host.docker.internal:5432/FinalSprintSem4
