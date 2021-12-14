@@ -1,4 +1,4 @@
-package com.example.restservice;
+package com.keyin.team3.restservice;
 
 public class Greeting {
 

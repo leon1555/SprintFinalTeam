@@ -1,15 +1,15 @@
-create table MOCK_DATA (
+create table mock_data (
 	id INT,
 	Buzzwords VARCHAR(50),
 	AppNames VARCHAR(50),
 	CompanyNames VARCHAR(50),
 	UserAgent VARCHAR(50)
 );
-insert into MOCK_DATA (id, Buzzwords, AppNames, CompanyNames, UserAgent) values (1, 'middleware', 'Stringtough', 'Quinu', 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/535.2 (KHTML, like Gecko) Ubuntu/11.10 Chromium/15.0.874.120 Chrome/15.0.874.120 Safari/535.2');
 insert into MOCK_DATA (id, Buzzwords, AppNames, CompanyNames, UserAgent) values (2, 'database', 'Konklab', 'Jabbercube', 'Mozilla/5.0 (Windows NT 5.2) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.792.0 Safari/535.1');
 insert into MOCK_DATA (id, Buzzwords, AppNames, CompanyNames, UserAgent) values (3, 'responsive', 'Rank', 'Kaymbo', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:21.0) Gecko/20130331 Firefox/21.0');
 insert into MOCK_DATA (id, Buzzwords, AppNames, CompanyNames, UserAgent) values (4, 'methodical', 'Trippledex', 'Livetube', 'Mozilla/5.0 (Windows NT 5.1) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.872.0 Safari/535.2');
 insert into MOCK_DATA (id, Buzzwords, AppNames, CompanyNames, UserAgent) values (5, 'capacity', 'Vagram', 'Yabox', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/534.24 (KHTML, like Gecko) Chrome/11.0.696.34 Safari/534.24');
+insert into MOCK_DATA (id, Buzzwords, AppNames, CompanyNames, UserAgent) values (1, 'middleware', 'Stringtough', 'Quinu', 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/535.2 (KHTML, like Gecko) Ubuntu/11.10 Chromium/15.0.874.120 Chrome/15.0.874.120 Safari/535.2');
 insert into MOCK_DATA (id, Buzzwords, AppNames, CompanyNames, UserAgent) values (6, 'database', 'Vagram', 'Babbleset', 'Mozilla/5.0 (Windows NT 6.1; U;WOW64; de;rv:11.0) Gecko Firefox/11.0');
 insert into MOCK_DATA (id, Buzzwords, AppNames, CompanyNames, UserAgent) values (7, 'mobile', 'Zathin', 'Skajo', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0a2) Gecko/20110613 Firefox/6.0a2');
 insert into MOCK_DATA (id, Buzzwords, AppNames, CompanyNames, UserAgent) values (8, 'Public-key', 'Flexidy', 'Meemm', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/534.24 (KHTML, like Gecko) Ubuntu/10.10 Chromium/12.0.703.0 Chrome/12.0.703.0 Safari/534.24');
@@ -20,7 +20,6 @@ insert into MOCK_DATA (id, Buzzwords, AppNames, CompanyNames, UserAgent) values 
 insert into MOCK_DATA (id, Buzzwords, AppNames, CompanyNames, UserAgent) values (13, 'Decentralized', 'Flowdesk', 'Mudo', 'Mozilla/5.0 (Windows NT 6.1; rv:12.0) Gecko/ 20120405 Firefox/14.0.1');
 insert into MOCK_DATA (id, Buzzwords, AppNames, CompanyNames, UserAgent) values (14, 'Vision-oriented', 'Y-find', 'Snaptags', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/534.24 (KHTML, like Gecko) Ubuntu/10.04 Chromium/11.0.696.0 Chrome/11.0.696.0 Safari/534.24');
 insert into MOCK_DATA (id, Buzzwords, AppNames, CompanyNames, UserAgent) values (15, 'Diverse', 'Tampflex', 'Buzzbean', 'Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.14 (KHTML, like Gecko) Chrome/24.0.1292.0 Safari/537.14');
-insert into MOCK_DATA (id, Buzzwords, AppNames, CompanyNames, UserAgent) values (16, 'protocol', 'Job', 'Thoughtworks', 'Mozilla/5.0 (Windows NT) AppleWebKit/534.20 (KHTML, like Gecko) Chrome/11.0.672.2 Safari/534.20');
 insert into MOCK_DATA (id, Buzzwords, AppNames, CompanyNames, UserAgent) values (17, 'Persistent', 'Temp', 'Twimbo', 'Mozilla/5.0 (compatible; Windows; U; Windows NT 6.2; WOW64; en-US; rv:12.0) Gecko/20120403211507 Firefox/12.0');
 insert into MOCK_DATA (id, Buzzwords, AppNames, CompanyNames, UserAgent) values (18, '4th generation', 'Otcom', 'Photojam', 'Mozilla/5.0 (Windows NT 6.1; rv:12.0) Gecko/20120403211507 Firefox/14.0.1');
 insert into MOCK_DATA (id, Buzzwords, AppNames, CompanyNames, UserAgent) values (19, 'moratorium', 'Stringtough', 'Wordify', 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_7_0; en-US) AppleWebKit/534.21 (KHTML, like Gecko) Chrome/11.0.678.0 Safari/534.21');
@@ -30,6 +29,7 @@ insert into MOCK_DATA (id, Buzzwords, AppNames, CompanyNames, UserAgent) values 
 insert into MOCK_DATA (id, Buzzwords, AppNames, CompanyNames, UserAgent) values (23, 'disintermediate', 'Zoolab', 'Livepath', 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/534.20 (KHTML, like Gecko) Chrome/11.0.669.0 Safari/534.20');
 insert into MOCK_DATA (id, Buzzwords, AppNames, CompanyNames, UserAgent) values (24, 'superstructure', 'Voltsillam', 'Dazzlesphere', 'Mozilla/5.0 (Macintosh; U; PPC Mac OS X 10_5_8; ja-jp) AppleWebKit/533.20.25 (KHTML, like Gecko) Version/5.0.4 Safari/533.20.27');
 insert into MOCK_DATA (id, Buzzwords, AppNames, CompanyNames, UserAgent) values (25, 'Seamless', 'Veribet', 'Skalith', 'Mozilla/5.0 (Windows NT 5.1; rv:15.0) Gecko/20100101 Firefox/13.0.1');
+insert into MOCK_DATA (id, Buzzwords, AppNames, CompanyNames, UserAgent) values (16, 'protocol', 'Job', 'Thoughtworks', 'Mozilla/5.0 (Windows NT) AppleWebKit/534.20 (KHTML, like Gecko) Chrome/11.0.672.2 Safari/534.20');
 insert into MOCK_DATA (id, Buzzwords, AppNames, CompanyNames, UserAgent) values (26, 'support', 'Stim', 'Vipe', 'Mozilla/5.0 (iPhone; U; fr; CPU iPhone OS 4_2_1 like Mac OS X; fr) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8C148a Safari/6533.18.5');
 insert into MOCK_DATA (id, Buzzwords, AppNames, CompanyNames, UserAgent) values (27, 'help-desk', 'Fixflex', 'Plambee', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_4) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.65 Safari/535.11');
 insert into MOCK_DATA (id, Buzzwords, AppNames, CompanyNames, UserAgent) values (28, 'needs-based', 'Bamity', 'Oozz', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/537.13+ (KHTML, like Gecko) Version/5.1.7 Safari/534.57.2');
