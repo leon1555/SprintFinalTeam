@@ -1,6 +1,5 @@
-package com.example.accessingdatarest;
+package com.keyin.team3.model.postgres;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import lombok.Getter;
 
 
@@ -11,7 +10,7 @@ import javax.persistence.Id;
 
 @Getter
 @Entity
-public class mock_data {
+public class PostGresMockData {
     @Id
     private int id;
     @Column

@@ -1,4 +1,4 @@
-package com.example.accessingdatarest;
+package com.keyin.team3.model.mysql;
 
 import lombok.Getter;
 
@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Getter
 @Entity
-public class mysqlmockdata {
+public class MySQLMockData {
 
     @Id
     private Long id;
