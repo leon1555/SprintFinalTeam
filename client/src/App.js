@@ -16,7 +16,7 @@ import SignUp from "./components/SignUp";
 toast.configure();
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
   const [adminRole, setAdminRole] = useState(false);
   const [database, setDatabase] = useState("mongo");
   const [name, setName] = useState(null);
