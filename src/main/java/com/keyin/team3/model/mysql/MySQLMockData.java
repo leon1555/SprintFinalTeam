@@ -7,6 +7,7 @@ import javax.persistence.*;
 
 @Getter
 @Entity
+@Table(name = "mysqlmockdata")
 public class MySQLMockData {
 
     @Id
