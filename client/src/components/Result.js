@@ -1,76 +1,63 @@
 import { useState, useEffect } from "react";
 import SearchDataService from "../services/search";
-// import { Link } from "react-router-dom";
 
-const Personnel = (props) => {
-  // console.log("isAuth [officer.js]: " + props.isAuth);
-  // console.log("database: " + props.database);
-  const database = props.database;
+import { v4 as uuidv4 } from "uuid"; // then use uuidv4() to insert id
+import Moment from "react-moment";
 
-  const initialPersonnelState = {
-    id: null,
-    surname: null,
-    first: null,
-    middle: null,
-    dob: null,
-    dod: null,
-    serial: null,
-    assignments: [],
-    promotions: [],
-    events: [],
-  };
-
-  const [personnel, setPersonnel] = useState(initialPersonnelState);
-  console.log(personnel);
+function Result({ isAuth }) {
+  const [history, setHistory] = useState([]);
 
   useEffect(() => {
-    const getPersonnel = (id) => {
-      SearchDataService.get(id, database)
-        .then((response) => {
-          setPersonnel(response.data);
-          console.log(response.data);
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    };
-
-    getPersonnel(props.match.params.id);
-  }, [props.match.params.id, database]);
+    SearchDataService.searchHistory(localStorage.userId)
+      .then((response) => {
+        console.log(response.data._embedded);
+        setHistory(response.data._embedded.history);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
 
   return (
-    <>
-      {personnel ? (
-        <div>
-          {personnel.surname && <h5>{personnel.surname}</h5>}
-          {personnel.first && <h6>{personnel.first}</h6>}
-          {personnel.middle && <h6>{personnel.middle}</h6>}
-          <h6>{personnel.serial}</h6>
-          <p>
-            {personnel.dob && (
-              <>
-                <strong>Date of Birth: </strong>
-                {personnel.dob.slice(0, 10)}
-                <br />
-              </>
-            )}
-            {personnel.dod && (
-              <>
-                <strong>Date of Death: </strong>
-                {personnel.dod.slice(0, 10)}
-                <br />
-              </>
-            )}
-          </p>
-        </div>
-      ) : (
-        <div>
-          <br />
-          <p>No Information Found</p>
-        </div>
-      )}
-    </>
+    <div className="row">
+      <table className="table table-hover table-dark">
+        <thead>
+          <tr>
+            <th scope="col">Search Query</th>
+            <th scope="col">Database</th>
+            <th scope="col">Time Stamp</th>
+          </tr>
+        </thead>
+        <tbody>
+          {history.length > 2 ? (
+            history.map((historyRow) => {
+              return (
+                <tr key={uuidv4()}>
+                  <td>{historyRow.searchQuery}</td>
+                  <td>{historyRow.db}</td>
+                  <td>
+                    <Moment
+                      date={historyRow.queryDateTime}
+                      subtract={{ hours: 3, minutes: 30 }}
+                      format="YYYY/MM/DD hh:mm:ss"
+                    />{" "}
+                    [NST]
+                  </td>
+                </tr>
+              );
+            })
+          ) : (
+            <tr>
+              <td colSpan={3} className="text-center">
+                {" "}
+                <h1>No Search Results</h1>
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+    </div>
   );
-};
+}
 
-export default Personnel;
+export default Result;

@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
 
-function Navbar({ user, isAuth, setAuth, setAdmin, setName, setTime }) {
+function Navbar({ user, isAuth, setAuth, setTime }) {
   const history = useHistory();
   const [btnText, setBtnText] = useState("menu");
   const [isActive, setIsActive] = useState(false);
@@ -13,10 +13,11 @@ function Navbar({ user, isAuth, setAuth, setAdmin, setName, setTime }) {
     e.preventDefault();
     try {
       localStorage.removeItem("token");
+      localStorage.removeItem("userId");
+      localStorage.removeItem("username");
+      localStorage.removeItem("email");
       setAuth(false);
       toast.success("Logout Succesful");
-      setAdmin(false);
-      setName("");
       history.push("/");
     } catch (err) {
       console.log(err.message);
@@ -71,14 +72,26 @@ function Navbar({ user, isAuth, setAuth, setAdmin, setName, setTime }) {
 
           <nav id="main_nav" className={isActive ? "active" : null}>
             <ul>
-              <li>
-                <span>
-                  {" "}
-                  <Link to={"/search"} className="nav-link">
-                    Search
-                  </Link>
-                </span>
-              </li>
+              {isAuth ? (
+                <>
+                  <li>
+                    <span>
+                      <Link to={"/history"} className="nav-link">
+                        Search History
+                      </Link>
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <Link to={"/search"} className="nav-link">
+                        Search
+                      </Link>
+                    </span>
+                  </li>
+                </>
+              ) : (
+                " "
+              )}
               <li>
                 <span>
                   {isAuth ? (

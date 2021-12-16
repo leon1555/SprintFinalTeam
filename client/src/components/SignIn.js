@@ -2,17 +2,15 @@ import { useState } from "react";
 import { useHistory } from "react-router";
 import { toast } from "react-toastify";
 
-const PORT = 8000;
-
-function Login({ setAuth, setUserId, getProfile }) {
+function Login({ setAuth }) {
   const history = useHistory();
 
   const [user, setUser] = useState({
-    email: "",
+    username: "",
     password: "",
   });
 
-  const { email, password } = user;
+  const { username, password } = user;
 
   const onChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -21,8 +19,8 @@ function Login({ setAuth, setUserId, getProfile }) {
   const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
-      const body = { email, password };
-      const response = await fetch(`http://localhost:${PORT}/api/users/login`, {
+      const body = { username, password };
+      const response = await fetch(`http://localhost:8080/api/auth/signin`, {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify(body),
@@ -30,13 +28,12 @@ function Login({ setAuth, setUserId, getProfile }) {
 
       const parseRes = await response.json();
 
-      console.log(parseRes);
-
       if (parseRes.token) {
         localStorage.setItem("token", parseRes.token);
-        setUserId(parseRes.user_id);
+        localStorage.setItem("userId", parseRes.id);
+        localStorage.setItem("username", parseRes.username);
+        localStorage.setItem("email", parseRes.email);
         setAuth(true);
-        getProfile(parseRes.user_id);
         toast.success("Login Successful");
         history.push("/");
       } else {
@@ -57,10 +54,10 @@ function Login({ setAuth, setUserId, getProfile }) {
             type="text"
             className="form-control m-2 input-size"
             id="email"
-            name="email"
-            placeholder="Email"
+            name="username"
+            placeholder="Username"
             required
-            value={user.email}
+            value={user.username}
             onChange={(e) => onChange(e)}
           />
           <input
