@@ -12,10 +12,10 @@ import java.util.List;
 @RepositoryRestResource(collectionResourceRel = "mock_data", path="mock_data")
 public interface PostGresRepository extends PagingAndSortingRepository<PostGresMockData, Integer> {
 
-    List<PostGresMockData>findById(@Param("id")int id);
-    List<PostGresMockData>findByBuzzwords(@Param("buzzwords")String buzzwords);
-    List<PostGresMockData>findByAppnames(@Param("appnames")String appnames);
-    List<PostGresMockData>findByCompanynames(@Param("companynames")String companynames);
-    List<PostGresMockData>findByUseragent(@Param("useragent")String useragent);
+    List<PostGresMockData>findById(@Param("id") int id);
+    List<PostGresMockData>findByBuzzwordsContaining(@Param("buzzwords") String buzzwords);
+    List<PostGresMockData>findByAppnamesContaining(@Param("appnames") String appnames);
+    List<PostGresMockData>findByCompanynamesContaining(@Param("companynames") String companynames);
+    List<PostGresMockData>findByUseragentContaining(@Param("useragent") String useragent);
 
 }
