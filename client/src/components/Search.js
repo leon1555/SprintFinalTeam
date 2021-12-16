@@ -1,20 +1,10 @@
 import { useState } from "react";
 import SearchDataService from "../services/search";
-import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid"; // then use uuidv4() to insert id
 
-function Search({ isAuth, userId, admin, setDatabase, database }) {
-  const [personnel, setPersonnel] = useState([]);
+function Search({ isAuth, setDatabase, database }) {
+  const [searchData, setSearchData] = useState([]);
   const [searchName, setSearchName] = useState("");
-  // const [currentUserId, setCurrentUserId] = useState(userId);
-
-  // let PORT = 8000;
-
-  // console.log("IsAuth [personnel-list.js]: " + isAuth);
-
-  // useEffect(() => {
-  //   retrievePersonnel();
-  // }, []);
 
   const onChangeSearchName = (e) => {
     const searchName = e.target.value;
@@ -24,28 +14,18 @@ function Search({ isAuth, userId, admin, setDatabase, database }) {
   const onChangeDatabase = (e) => {
     const searchDatabase = e.target.value;
     setDatabase(searchDatabase);
+    setSearchData([]);
   };
 
-  // const retrievePersonnel = () => {
-  //   SearchDataService.getAll()
-  //     .then((response) => {
-  //       // console.log(response.data);
-  //       setPersonnel(response.data.personnel);
-  //     })
-  //     .catch((e) => {
-  //       console.log(e);
-  //     });
-  // };
-
-  // const refreshList = () => {
-  //   retrievePersonnel();
-  // };
-
-  const find = (query, by, db, userId) => {
-    SearchDataService.find(query, by, db, userId)
+  const find = (query, dbPath) => {
+    SearchDataService.find(query, dbPath)
       .then((response) => {
-        console.log(response.data);
-        setPersonnel(response.data.personnel);
+        console.log(response.data._embedded);
+        if (dbPath.includes("mysql")) {
+          setSearchData(response.data._embedded.mysqlmockdata);
+        } else {
+          setSearchData(response.data._embedded.mock_data);
+        }
       })
       .catch((e) => {
         console.log(e);
@@ -53,19 +33,18 @@ function Search({ isAuth, userId, admin, setDatabase, database }) {
   };
 
   const findByName = () => {
-    find(searchName, "name", database, userId);
+    find(searchName, database);
   };
 
   return (
     <>
-      {/* <div>{database}</div> */}
       {isAuth ? (
         <div className="rows d-flex align-content-center">
           <div className="input-group">
             <input
               type="text"
               className="form-control"
-              placeholder="Search By Name"
+              placeholder="Search Query"
               value={searchName}
               onChange={onChangeSearchName}
             />
@@ -76,9 +55,11 @@ function Search({ isAuth, userId, admin, setDatabase, database }) {
             value={database}
             onChange={(e) => onChangeDatabase(e)}
           >
-            <option>Database</option>
-            <option value="mongo">MongoDB</option>
-            <option value="post">PostGreSQL</option>
+            <option>Database Option</option>
+            <option value="mysql-model">MySQL - Car Model</option>
+            <option value="mysql-make">MySQL - Car Make</option>
+            <option value="post-buzz">PostGreSQL - Buzzword</option>
+            <option value="post-app">PostGreSQL - App Name</option>
           </select>
           <div className="input-group-append">
             <button className="btn btn-outline-secondary" type="button" onClick={findByName}>
@@ -90,34 +71,35 @@ function Search({ isAuth, userId, admin, setDatabase, database }) {
         <h1>Access Denied, Please Login to Search</h1>
       )}
       <div className="row">
-        {personnel.map((officer) => {
-          let officerName;
-          let officerId = officer.personnel_id ? officer.personnel_id : officer._id;
-          if (officer.surname !== "undefined") {
-            officerName = officer.surname;
-          }
-          if (officer.first) {
-            officerName += ", " + officer.first;
-          }
-          if (officer.middle) {
-            let middleI = officer.middle.slice(0, 1);
-            officerName += " " + middleI + ".";
-          }
-          return (
-            <div className="col-lg-4 p-1" key={uuidv4()}>
-              <div className="card text-center bg-dark">
-                <div className="card-body m-1">
-                  <h5 className="card-title">{officerName}</h5>
-                  <div className="row">
-                    <Link to={"/personnel/" + officerId} className="btn btn-primary m-1">
-                      View Officer Profile
-                    </Link>
+        {database.includes("mysql")
+          ? searchData.map((searchMySQL) => {
+              return (
+                <div className="col-lg-4 p-1" key={uuidv4()}>
+                  <div className="card text-center bg-dark">
+                    <div className="card-body m-1">
+                      <h3 className="card-title">{searchMySQL.carmake}</h3>
+                      <h5 className="card-title">
+                        {searchMySQL.carmodel} [{searchMySQL.color}]
+                      </h5>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          );
-        })}
+              );
+            })
+          : searchData.map((searchPostGreSQL) => {
+              return (
+                <div className="col-lg-4 p-1" key={uuidv4()}>
+                  <div className="card text-center bg-dark">
+                    <div className="card-body m-1">
+                      <h3 className="card-title">{searchPostGreSQL.buzzwords}</h3>
+                      <h5 className="card-title">
+                        {searchPostGreSQL.appnames} [{searchPostGreSQL.companynames}]
+                      </h5>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
       </div>
     </>
   );

@@ -1,22 +1,18 @@
 import { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
-
-// import PropTypes from "prop-types";
-// import { connect } from "react-redux";
-// import { registerUser } from "../actions/authActions";
 
 function Register() {
   let history = useHistory();
 
   const [inputs, setInputs] = useState({
-    name: "",
+    username: "",
     email: "",
     password: "",
     password2: "",
   });
 
-  const { name, email, password, password2 } = inputs;
+  const { username, email, password, password2 } = inputs;
 
   const onChange = (e) => {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
@@ -25,26 +21,23 @@ function Register() {
   const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
-      const body = { name, email, password, password2 };
-      // if (!email || !password || !name || !password2) {
-      //   toast.warning("Fields Incomplete");
-      //   return;
-      // }
+      const body = { username: username, email: email, password: password, role: ["mod", "admin"] };
 
-      // if (password !== password2) {
-      //   toast.warning("Password fields do not match");
-      //   return;
-      // }
+      if (!email || !password || !username || !password2) {
+        toast.warning("Fields Incomplete");
+        return;
+      }
 
-      console.log(body);
+      if (password !== password2) {
+        toast.warning("Password fields do not match");
+        return;
+      }
 
-      const response = await fetch("http://localhost:8000/api/users/register", {
+      const response = await fetch("http://localhost:8080/api/auth/signup", {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify(body),
       });
-
-      console.log(response);
 
       const parseRes = await response.json();
 
@@ -69,10 +62,10 @@ function Register() {
           <input
             className="form-control m-2 input-size"
             type="text"
-            name="name"
-            placeholder="Name"
+            name="username"
+            placeholder="Username"
             required
-            value={name}
+            value={username}
             onChange={(e) => onChange(e)}
           />
           <input
@@ -109,16 +102,4 @@ function Register() {
   );
 }
 
-// Register.propTypes = {
-//   registerUser: PropTypes.func.isRequired,
-//   auth: PropTypes.object.isRequired,
-//   errors: PropTypes.object.isRequired,
-// };
-
-// const mapStateToProps = (state) => ({
-//   auth: state.auth,
-//   errors: state.errors,
-// });
-
-// export default connect(mapStateToProps, { registerUser })(withRouter(Register));
 export default Register;

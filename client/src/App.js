@@ -17,28 +17,8 @@ toast.configure();
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(true);
-  const [adminRole, setAdminRole] = useState(false);
-  const [database, setDatabase] = useState("mongo");
-  const [name, setName] = useState(null);
-  const [userId, setUserId] = useState(null);
+  const [database, setDatabase] = useState("mysql-make");
   const [time, setTime] = useState(null);
-
-  // ---- Get Name and Admin Privileges ---- \\
-  async function getProfile(userId) {
-    try {
-      const response = await fetch(`http://localhost:8000/api/users/${userId}`, {
-        method: "GET",
-        headers: { token: localStorage.token },
-      });
-
-      const parseData = await response.json();
-
-      setName(parseData.name);
-      setAdminRole(parseData.admin);
-    } catch (err) {
-      console.error(err.message);
-    }
-  }
 
   const setAuth = (boolean) => {
     setIsAuthenticated(boolean);
@@ -52,14 +32,7 @@ function App() {
           <time>{time}</time>
         </div>
       </div>
-      {/* <Provider store={store}> */}
-      <Navbar
-        isAuth={isAuthenticated}
-        setAuth={setAuth}
-        setAdmin={setAdminRole}
-        setName={setName}
-        setTime={setTime}
-      />
+      <Navbar isAuth={isAuthenticated} setAuth={setAuth} setTime={setTime} />
       <main className="main_body">
         <div className="content_wrapper">
           <div className="content_container">
@@ -67,15 +40,7 @@ function App() {
               <Route
                 exact
                 path={["/"]}
-                render={(props) => (
-                  <Landing
-                    {...props}
-                    isAuth={isAuthenticated}
-                    userId={userId}
-                    admin={adminRole}
-                    userName={name}
-                  />
-                )}
+                render={(props) => <Landing {...props} isAuth={isAuthenticated} />}
               />
               <Route
                 exact
@@ -84,36 +49,16 @@ function App() {
                   <Search
                     {...props}
                     isAuth={isAuthenticated}
-                    userId={userId}
-                    admin={adminRole}
                     setDatabase={setDatabase}
                     database={database}
                   />
                 )}
               />
               <Route
-                path="/search/:id"
-                render={(props) => (
-                  <Results
-                    {...props}
-                    isAuth={isAuthenticated}
-                    admin={adminRole}
-                    userId={userId}
-                    database={database}
-                  />
-                )}
+                path="/history"
+                render={(props) => <Results {...props} isAuth={isAuthenticated} />}
               />
-              <Route
-                path="/signin"
-                render={(props) => (
-                  <SignIn
-                    {...props}
-                    setAuth={setAuth}
-                    setUserId={setUserId}
-                    getProfile={getProfile}
-                  />
-                )}
-              />
+              <Route path="/signin" render={(props) => <SignIn {...props} setAuth={setAuth} />} />
               <Route path="/signup" render={(props) => <SignUp {...props} />} />
             </Switch>
           </div>

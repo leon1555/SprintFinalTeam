@@ -2,6 +2,7 @@ Signup:     /api/auth/signup/       use raw JSON data
                                     {"username":"username","email":"email","password":"password","role": ["mod","user","admin"]
 Login:      /api/auth/signin        use raw JSON data
                                     {"username": "username", "password": "password"}
+User:
 
 
 
