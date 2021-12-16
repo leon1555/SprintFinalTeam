@@ -16,7 +16,7 @@ import SignUp from "./components/SignUp";
 toast.configure();
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [database, setDatabase] = useState("mysql-make");
   const [time, setTime] = useState(null);
 
