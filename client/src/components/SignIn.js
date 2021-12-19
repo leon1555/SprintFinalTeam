@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useHistory } from "react-router";
 import { toast } from "react-toastify";
 
-function Login({ setAuth }) {
+function Login({ setAuth, setAuthToken }) {
   const history = useHistory();
 
   const [user, setUser] = useState({
@@ -20,7 +20,7 @@ function Login({ setAuth }) {
     e.preventDefault();
     try {
       const body = { username, password };
-      const response = await fetch(`http://localhost:8080/api/auth/signin`, {
+      const response = await fetch(`http://3.92.38.37:8080/api/auth/signin`, {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify(body),
@@ -34,6 +34,7 @@ function Login({ setAuth }) {
         localStorage.setItem("username", parseRes.username);
         localStorage.setItem("email", parseRes.email);
         setAuth(true);
+        setAuthToken(parseRes.token);
         toast.success("Login Successful");
         history.push("/");
       } else {

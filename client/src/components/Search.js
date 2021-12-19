@@ -2,7 +2,7 @@ import { useState } from "react";
 import SearchDataService from "../services/search";
 import { v4 as uuidv4 } from "uuid"; // then use uuidv4() to insert id
 
-function Search({ isAuth, setDatabase, database }) {
+function Search({ isAuth, setDatabase, database, authToken }) {
   const [searchData, setSearchData] = useState([]);
   const [searchName, setSearchName] = useState("");
 
@@ -18,9 +18,8 @@ function Search({ isAuth, setDatabase, database }) {
   };
 
   const find = (query, dbPath) => {
-    SearchDataService.find(query, dbPath)
+    SearchDataService.find(query, dbPath, localStorage.token)
       .then((response) => {
-        console.log(response.data._embedded);
         if (dbPath.includes("mysql")) {
           setSearchData(response.data._embedded.mysqlmockdata);
         } else {
@@ -71,8 +70,9 @@ function Search({ isAuth, setDatabase, database }) {
         <h1>Access Denied, Please Login to Search</h1>
       )}
       <div className="row">
-        {database.includes("mysql")
-          ? searchData.map((searchMySQL) => {
+        {database.length > 0 ? (
+          database.includes("mysql") ? (
+            searchData.map((searchMySQL) => {
               return (
                 <div className="col-lg-4 p-1" key={uuidv4()}>
                   <div className="card text-center bg-dark">
@@ -86,7 +86,8 @@ function Search({ isAuth, setDatabase, database }) {
                 </div>
               );
             })
-          : searchData.map((searchPostGreSQL) => {
+          ) : (
+            searchData.map((searchPostGreSQL) => {
               return (
                 <div className="col-lg-4 p-1" key={uuidv4()}>
                   <div className="card text-center bg-dark">
@@ -99,7 +100,11 @@ function Search({ isAuth, setDatabase, database }) {
                   </div>
                 </div>
               );
-            })}
+            })
+          )
+        ) : (
+          <h2>Sorry, No Results Found</h2>
+        )}
       </div>
     </>
   );

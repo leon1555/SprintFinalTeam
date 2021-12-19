@@ -6,6 +6,6 @@ const headers = {
 };
 
 export default axios.create({
-  baseURL: "http://localhost:8080/",
+  baseURL: "http://3.92.38.37:8080/",
   headers: headers,
 });

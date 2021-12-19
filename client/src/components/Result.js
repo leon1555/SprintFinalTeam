@@ -4,13 +4,12 @@ import SearchDataService from "../services/search";
 import { v4 as uuidv4 } from "uuid"; // then use uuidv4() to insert id
 import Moment from "react-moment";
 
-function Result({ isAuth }) {
+function Result({ isAuth, authToken }) {
   const [history, setHistory] = useState([]);
 
   useEffect(() => {
-    SearchDataService.searchHistory(localStorage.userId)
+    SearchDataService.searchHistory(localStorage.userId, localStorage.token)
       .then((response) => {
-        console.log(response.data._embedded);
         setHistory(response.data._embedded.history);
       })
       .catch((e) => {
