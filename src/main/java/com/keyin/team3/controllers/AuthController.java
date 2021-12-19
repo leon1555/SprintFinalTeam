@@ -118,9 +118,14 @@ public class AuthController {
       });
     }
 
+
     user.setRoles(roles);
     userRepository.save(user);
 
     return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+  }
+  @GetMapping("/home")
+  public ResponseEntity<?> splashPage(){
+    return ResponseEntity.ok(new MessageResponse("Welcome to the Page!"));
   }
 }

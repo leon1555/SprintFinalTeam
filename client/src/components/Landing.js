@@ -1,4 +1,4 @@
-function Login({ isAuth, userId, username, email }) {
+function Login({ isAuth, authToken }) {
   return (
     <>
       <article>
@@ -8,9 +8,11 @@ function Login({ isAuth, userId, username, email }) {
             {isAuth && (
               <>
                 <br />
-                User ID: {localStorage.userId}
-                <br /> Username: {localStorage.username}
-                <br /> Email: {localStorage.email}
+                User ID: <strong>{localStorage.userId}</strong>
+                <br /> Username: <strong>{localStorage.username}</strong>
+                <br /> Email: <strong>{localStorage.email}</strong>
+                <br /> Local Storgae: <strong>{localStorage.token}</strong>
+                <br /> UseState: <strong>{authToken}</strong>
               </>
             )}
           </h3>

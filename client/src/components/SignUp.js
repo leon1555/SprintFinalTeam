@@ -33,7 +33,7 @@ function Register() {
         return;
       }
 
-      const response = await fetch("http://localhost:8080/api/auth/signup", {
+      const response = await fetch("http://3.92.38.37:8080/api/auth/signup", {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify(body),

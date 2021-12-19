@@ -1,12 +1,12 @@
 import http from "../http-common";
+import setAuthToken from "../utils/setAuthToken";
 
 class SearchDataService {
-  find(searchQuery, dbPath = "mysql-make") {
-    console.log(dbPath);
+  find(searchQuery, dbPath = "mysql-make", authToken) {
+    setAuthToken(authToken);
     let [db, path] = dbPath.split("-", 2);
-    console.log(db, path);
     let userId = localStorage.userId;
-    const body = { userId: userId, db: db, searchQuery: searchQuery };
+    const body = { userId: userId, db: dbPath, searchQuery: searchQuery };
     http
       .post("/history", body)
       .then((response) => null)
@@ -26,7 +26,8 @@ class SearchDataService {
     }
   }
 
-  searchHistory(id) {
+  searchHistory(id, authToken) {
+    setAuthToken(authToken);
     return http.get(`/history/search/findByUserId/?userId=${id}`);
   }
 }

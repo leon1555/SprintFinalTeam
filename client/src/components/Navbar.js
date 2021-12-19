@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
 
-function Navbar({ user, isAuth, setAuth, setTime }) {
+function Navbar({ user, isAuth, setAuth, setTime, setAuthToken }) {
   const history = useHistory();
   const [btnText, setBtnText] = useState("menu");
   const [isActive, setIsActive] = useState(false);
@@ -17,6 +17,7 @@ function Navbar({ user, isAuth, setAuth, setTime }) {
       localStorage.removeItem("username");
       localStorage.removeItem("email");
       setAuth(false);
+      setAuthToken("");
       toast.success("Logout Succesful");
       history.push("/");
     } catch (err) {
@@ -60,7 +61,7 @@ function Navbar({ user, isAuth, setAuth, setTime }) {
         <div className="header_inner">
           <hgroup>
             <Link to={"/"} className="navbar-brand">
-              <h1>Team 3 - Semester 4 Final Sprint Search Forum</h1>
+              <h1>Team 3 - Semester 4 Final Sprint</h1>
             </Link>
           </hgroup>
 
